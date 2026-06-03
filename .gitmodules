@@ -1,0 +1,3 @@
+[submodule "modules/OptimAIze-OCR"]
+	path = modules/OptimAIze-OCR
+	url = https://github.com/BigM219/OptimAIze-OCR.git
