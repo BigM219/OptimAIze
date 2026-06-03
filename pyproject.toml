@@ -1,0 +1,19 @@
+[project]
+name = "optimaize"
+version = "0.1.0"
+description = "Parent OptimAIze workspace with optional child modules such as OptimAIze-OCR."
+requires-python = ">=3.10"
+dependencies = [
+    "gradio>=4.0.0",
+    "pillow>=10.0.0",
+    "pytest>=8.0.0"
+]
+
+[tool.setuptools.packages.find]
+where = ["packages/parent-core"]
+include = ["optimaize*"]
+exclude = ["modules*", "apps*", "outputs*", "weights*", "assets*"]
+
+[build-system]
+requires = ["setuptools>=61.0.0"]
+build-backend = "setuptools.build_meta"
