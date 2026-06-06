@@ -1,4 +1,7 @@
-import { apiGet, apiPost } from './client';
+import { apiGet, apiPost, API_BASE } from './client';
+
+/** Absolute URL to the parent API health endpoint (for direct browser links). */
+export const HEALTH_URL = `${API_BASE}/api/v1/health`;
 
 export type HealthResponse = {
   ok: boolean;

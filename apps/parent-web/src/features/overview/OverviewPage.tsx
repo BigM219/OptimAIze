@@ -1,4 +1,4 @@
-import { HealthResponse } from '../../shared/api/parentApi';
+import { HealthResponse, HEALTH_URL } from '../../shared/api/parentApi';
 
 type Props = {
   health: HealthResponse | null;
@@ -30,7 +30,7 @@ export function OverviewPage({ health, status, moduleCount }: Props) {
           </p>
           <div className="hero-actions">
             <a className="primary-action" href="#modules">View modules</a>
-            <a className="secondary-action" href="http://127.0.0.1:8000/api/v1/health" target="_blank" rel="noreferrer">Check API</a>
+            <a className="secondary-action" href={HEALTH_URL} target="_blank" rel="noreferrer">Check API</a>
           </div>
         </div>
 
