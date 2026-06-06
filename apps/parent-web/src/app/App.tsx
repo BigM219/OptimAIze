@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { ModulesPage } from '../features/modules/ModulesPage';
 import { OverviewPage } from '../features/overview/OverviewPage';
-import { getHealth, getModules, HealthResponse, launchOcrLegacyUi, ModuleStatus } from '../shared/api/parentApi';
+import { getHealth, getModules, HealthResponse, HEALTH_URL, launchOcrLegacyUi, ModuleStatus } from '../shared/api/parentApi';
 
 export function App() {
   const [health, setHealth] = useState<HealthResponse | null>(null);
@@ -44,7 +44,7 @@ export function App() {
         <div className="nav-links" aria-label="Primary navigation">
           <a href="#overview">Workspace</a>
           <a href="#modules">Modules</a>
-          <a href="http://127.0.0.1:8000/api/v1/health" target="_blank" rel="noreferrer">API health</a>
+          <a href={HEALTH_URL} target="_blank" rel="noreferrer">API health</a>
         </div>
         <a className="nav-cta" href="#modules">Open modules</a>
       </nav>

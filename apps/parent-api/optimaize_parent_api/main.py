@@ -3,7 +3,7 @@ from __future__ import annotations
 import sys
 from pathlib import Path
 
-from fastapi import FastAPI, Request
+from fastapi import Depends, FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 
@@ -13,6 +13,7 @@ if str(PARENT_CORE) not in sys.path:
     sys.path.insert(0, str(PARENT_CORE))
 
 from optimaize_parent_api.api.v1 import routes_health, routes_modules
+from optimaize_parent_api.core.auth import require_api_key
 from optimaize_parent_api.core.config import get_settings
 from optimaize_parent_api.core.errors import OptimAIzeParentError
 
@@ -39,4 +40,4 @@ def root_health() -> dict[str, str | bool]:
 
 
 app.include_router(routes_health.router, prefix="/api/v1")
-app.include_router(routes_modules.router, prefix="/api/v1")
+app.include_router(routes_modules.router, prefix="/api/v1", dependencies=[Depends(require_api_key)])

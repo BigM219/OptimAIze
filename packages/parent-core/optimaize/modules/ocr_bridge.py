@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import contextlib
 import json
+import os
 import subprocess
 import sys
 import time
@@ -11,7 +12,25 @@ from typing import Iterator
 
 from PIL import Image
 
-PROJECT_ROOT = Path(__file__).resolve().parents[4]
+def _discover_project_root() -> Path:
+    """Locate the OptimAIze workspace root.
+
+    Prefers the ``OPTIMAIZE_PROJECT_ROOT`` env var (robust to file moves), then
+    falls back to walking up until a directory containing ``modules`` is found,
+    and finally to the historical fixed depth. The fixed-depth form alone broke
+    silently whenever this file moved, so it is now the last resort.
+    """
+    configured = os.getenv("OPTIMAIZE_PROJECT_ROOT")
+    if configured:
+        return Path(configured).resolve()
+    here = Path(__file__).resolve()
+    for parent in here.parents:
+        if (parent / "modules" / "OptimAIze-OCR").is_dir():
+            return parent
+    return here.parents[4]
+
+
+PROJECT_ROOT = _discover_project_root()
 OCR_CHILD_DIR = PROJECT_ROOT / "modules" / "OptimAIze-OCR"
 OCR_CHILD_SRC = OCR_CHILD_DIR / "src"
 OCR_API_DIR = OCR_CHILD_DIR / "apps" / "api"

@@ -43,3 +43,24 @@ def test_launch_ocr_ui_uses_bridge(monkeypatch) -> None:
     assert response.status_code == 200
     assert response.json()["pid"] == 123
     assert response.json()["url"] == "http://127.0.0.1:7862"
+
+
+def test_api_key_required_when_configured(monkeypatch) -> None:
+    monkeypatch.setenv("OPTIMAIZE_API_KEY", "secret-key")
+    client = TestClient(app)
+
+    # Health stays open (probes need no key).
+    assert client.get("/api/v1/health").status_code == 200
+
+    # Protected route refused without the header.
+    assert client.get("/api/v1/modules").status_code == 401
+    # Wrong key refused.
+    assert client.get("/api/v1/modules", headers={"X-API-Key": "wrong"}).status_code == 401
+    # Correct key accepted.
+    assert client.get("/api/v1/modules", headers={"X-API-Key": "secret-key"}).status_code == 200
+
+
+def test_no_api_key_means_open_access(monkeypatch) -> None:
+    monkeypatch.delenv("OPTIMAIZE_API_KEY", raising=False)
+    client = TestClient(app)
+    assert client.get("/api/v1/modules").status_code == 200
