@@ -7,3 +7,7 @@ class OptimAIzeParentError(Exception):
 
 class ModuleLaunchError(OptimAIzeParentError):
     status_code = 500
+
+
+class AuthError(OptimAIzeParentError):
+    status_code = 401
