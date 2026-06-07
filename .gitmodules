@@ -1,3 +1,6 @@
 [submodule "modules/OptimAIze-OCR"]
 	path = modules/OptimAIze-OCR
 	url = https://github.com/BigM219/OptimAIze-OCR.git
+[submodule "modules/OptimAIze-Work"]
+	path = modules/OptimAIze-Work
+	url = https://github.com/BigM219/OptimAIze-Work.git
