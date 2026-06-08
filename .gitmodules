@@ -4,3 +4,6 @@
 [submodule "modules/OptimAIze-Work"]
 	path = modules/OptimAIze-Work
 	url = https://github.com/BigM219/OptimAIze-Work.git
+[submodule "modules/OptimAIze-VideoMaker"]
+	path = modules/OptimAIze-VideoMaker
+	url = https://github.com/BigM219/OptimAIze-VideoMaker.git
